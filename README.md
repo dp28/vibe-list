@@ -8,6 +8,8 @@ Shared shopping list web app built with Next.js, TypeScript, and Supabase.
 
 - Node.js 24.2.0 (see `.tool-versions`)
 - npm
+- Docker (for local Supabase)
+- Supabase CLI (for local development)
 
 ### Setup
 
@@ -17,21 +19,66 @@ Shared shopping list web app built with Next.js, TypeScript, and Supabase.
    npm install
    ```
 
-2. Copy environment variables:
+2. Install Supabase CLI (if not already installed):
+
+   ```bash
+   npm install -g supabase
+   ```
+
+   Or using Homebrew (macOS):
+
+   ```bash
+   brew install supabase/tap/supabase
+   ```
+
+3. Start local Supabase:
+
+   ```bash
+   npm run supabase:start
+   ```
+
+   This will start a local Supabase instance with default credentials. The app is configured to use these automatically in development mode.
+
+4. (Optional) Copy environment variables for production:
 
    ```bash
    cp .env.example .env.local
    ```
 
-3. Add your environment variables to `.env.local` (see section 3 for Supabase setup)
+   For local development, you don't need to set these - the app uses default local Supabase values automatically.
 
-4. Run the development server:
+5. Run the development server:
 
    ```bash
    npm run dev
    ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser
+6. Open [http://localhost:3000](http://localhost:3000) in your browser
+
+### Local Supabase
+
+The app is configured to use local Supabase by default in development mode. This means you can develop without connecting to a production database.
+
+**Local Supabase URLs:**
+
+- API URL: `http://127.0.0.1:54321`
+- Studio (Database UI): `http://127.0.0.1:54323`
+- Anon Key: (automatically configured)
+
+**Supabase Commands:**
+
+- `npm run supabase:start` - Start local Supabase
+- `npm run supabase:stop` - Stop local Supabase
+- `npm run supabase:reset` - Reset local database
+- `npm run supabase:status` - Check Supabase status
+
+**Accessing Local Supabase Studio:**
+After starting Supabase, visit [http://127.0.0.1:54323](http://127.0.0.1:54323) to access the Supabase Studio where you can:
+
+- View and edit database tables
+- Run SQL queries
+- Manage authentication
+- View API documentation
 
 ### Scripts
 
@@ -42,6 +89,10 @@ Shared shopping list web app built with Next.js, TypeScript, and Supabase.
 - `npm test` - Run tests
 - `npm run format` - Format code with Prettier
 - `npm run format:check` - Check code formatting
+- `npm run supabase:start` - Start local Supabase
+- `npm run supabase:stop` - Stop local Supabase
+- `npm run supabase:reset` - Reset local database
+- `npm run supabase:status` - Check Supabase status
 
 ## Deployment
 

@@ -13,3 +13,4 @@
 - Avoid premature optimization
 - Prefer boring, well-documented patterns
 - Use British English
+- Only make changes to files that are relevant
