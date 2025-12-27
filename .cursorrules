@@ -1,0 +1,15 @@
+- Write small, readable functions (target < 10 lines)
+- One responsibility per file
+- Prefer explicit names over clever abstractions
+- No inline magic numbers or strings
+- Extract business logic from React components
+- Favour composition over deep conditionals
+- Comments are only used when variable / function names cannot explain code sufficiently
+- Comments, when needed, explain *why*, not *what*
+- All non-trivial logic must have tests
+- UI that performs network requests must include:
+  - Loading state
+  - Error state
+- Avoid premature optimization
+- Prefer boring, well-documented patterns
+- Use British English
