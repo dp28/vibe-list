@@ -18,21 +18,18 @@ function getEnvVar(key: string, defaultValue?: string): string {
 }
 
 export function getSupabaseUrl(): string {
-  // Use local defaults in development
   const isDevelopment = process.env.NODE_ENV === "development";
-  return getEnvVar(
-    SUPABASE_URL_KEY,
-    isDevelopment ? LOCAL_SUPABASE_URL : undefined
-  );
+  const isBuild = process.env.NEXT_PHASE === "phase-production-build";
+  const defaultValue = isDevelopment || isBuild ? LOCAL_SUPABASE_URL : undefined;
+  return getEnvVar(SUPABASE_URL_KEY, defaultValue);
 }
 
 export function getSupabaseAnonKey(): string {
-  // Use local defaults in development
   const isDevelopment = process.env.NODE_ENV === "development";
-  return getEnvVar(
-    SUPABASE_ANON_KEY_KEY,
-    isDevelopment ? LOCAL_SUPABASE_ANON_KEY : undefined
-  );
+  const isBuild = process.env.NEXT_PHASE === "phase-production-build";
+  const defaultValue =
+    isDevelopment || isBuild ? LOCAL_SUPABASE_ANON_KEY : undefined;
+  return getEnvVar(SUPABASE_ANON_KEY_KEY, defaultValue);
 }
 
 export function validateSupabaseEnv(): void {
