@@ -1,8 +1,10 @@
 # Incremental Build Plan
+
 ## Shared Shopping List Web App (Vercel + Supabase)
 
 Each numbered section corresponds to **one git commit**.
 Every commit must:
+
 - Build successfully
 - Pass tests and linting
 - Be safe to deploy
@@ -13,9 +15,11 @@ Every commit must:
 ## 0. Human Setup (Pre-Code) ⚠️
 
 ### Goal
+
 Prepare all external services before writing code.
 
 ### Tasks (Human Required)
+
 - Create / verify accounts:
   - GitHub
   - Vercel
@@ -30,6 +34,7 @@ _No code yet._
 ## 1. Repository Bootstrap + AI Rules + CI/CD (Foundational)
 
 ### Goal
+
 Establish guardrails **before any app code exists**.
 
 ---
@@ -39,13 +44,14 @@ Establish guardrails **before any app code exists**.
 Create `.cursorrules` at repo root.
 
 #### `.cursorrules`
+
 - Write small, readable functions (target < 40 lines)
 - One responsibility per file
 - Prefer explicit names over clever abstractions
 - No inline magic numbers or strings
 - Extract business logic from React components
 - Favor composition over deep conditionals
-- Comments explain *why*, not *what*
+- Comments explain _why_, not _what_
 - All non-trivial logic must have tests
 - UI that performs network requests must include:
   - Loading state
@@ -60,6 +66,7 @@ This file **must exist before writing application code**.
 ### 1.2 Tooling & CI
 
 ### Tasks
+
 - Initialize Next.js (App Router) with TypeScript
 - Add ESLint + Prettier
 - Add testing framework (Vitest or Jest)
@@ -71,12 +78,14 @@ This file **must exist before writing application code**.
   - Require CI to pass before merge
 
 ### Deliverables
+
 - `.cursorrules`
 - `.github/workflows/ci.yml`
 - Lint + test configs
 - Minimal homepage
 
 ### Verification
+
 - `npm run lint` passes
 - `npm test` passes
 - CI runs on push
@@ -86,19 +95,23 @@ This file **must exist before writing application code**.
 ## 2. Vercel Deployment Pipeline (Before Features)
 
 ### Goal
+
 Every merge to `main` deploys automatically.
 
 ### Tasks
+
 - Connect GitHub repo to Vercel
 - Configure production + preview deployments
 - Add environment variable placeholders
 - Verify deploy from `main`
 
 ### Deliverables
+
 - Live production URL
 - Preview URLs for PRs
 
 ### Human Required
+
 - Link repo in Vercel dashboard
 - Add env vars (empty placeholders acceptable initially)
 
@@ -107,9 +120,11 @@ Every merge to `main` deploys automatically.
 ## 3. Supabase Project Setup (Backend Skeleton)
 
 ### Goal
+
 Backend exists, even if app does little.
 
 ### Tasks
+
 - Create Supabase project
 - Enable:
   - Postgres
@@ -118,6 +133,7 @@ Backend exists, even if app does little.
 - Add local dev env support
 
 ### Deliverables
+
 - Supabase project
 - `lib/supabaseClient.ts`
 - `.env.local` and Vercel env vars:
@@ -125,10 +141,12 @@ Backend exists, even if app does little.
   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
 
 ### Tests
+
 - Client initialization test
 - Environment validation test
 
 ### Human Required
+
 - Create Supabase project
 - Copy keys to local + Vercel envs
 
@@ -137,28 +155,34 @@ Backend exists, even if app does little.
 ## 4. Authentication (Google SSO)
 
 ### Goal
+
 Users can sign in securely.
 
 ### Tasks
+
 - Enable Google OAuth in Supabase
 - Implement auth provider
 - Add sign-in and sign-out UI
 - Protect authenticated routes
 
 ### UI Requirements
+
 - Loading state while auth initializes
 - Error UI if auth fails
 
 ### Deliverables
+
 - Auth hook (`useAuth`)
 - Authenticated layout
 - Sign-in screen
 
 ### Tests
+
 - Auth state logic tests
 - Route protection tests (mocked)
 
 ### Human Required
+
 - Create Google OAuth credentials
 - Configure redirect URLs in Supabase
 
@@ -167,9 +191,11 @@ Users can sign in securely.
 ## 5. Minimal List MVP (Single List, Useful App)
 
 ### Goal
+
 Ship something genuinely useful fast.
 
 ### Tasks
+
 - Create tables:
   - `lists`
   - `items`
@@ -179,15 +205,18 @@ Ship something genuinely useful fast.
 - Persist to Supabase
 
 ### UI Requirements
+
 - Loading state while fetching list
 - Error state if fetch fails
 
 ### Deliverables
+
 - List screen
 - Add item input
 - Checkbox interaction
 
 ### Tests
+
 - Item CRUD logic tests
 - List fetch tests (mocked Supabase)
 
@@ -196,19 +225,23 @@ Ship something genuinely useful fast.
 ## 6. Realtime Sync
 
 ### Goal
+
 Multiple users see updates instantly.
 
 ### Tasks
+
 - Enable Supabase realtime
 - Subscribe to item changes
 - Update UI on insert/update/delete
 - Cleanup subscriptions properly
 
 ### UI Requirements
+
 - Sync-safe rendering
 - No duplicate items
 
 ### Tests
+
 - Subscription handler tests
 - Event handling logic tests
 
@@ -217,20 +250,24 @@ Multiple users see updates instantly.
 ## 7. Offline Support (Local-First Core)
 
 ### Goal
+
 App works without internet.
 
 ### Tasks
+
 - Add IndexedDB persistence
 - Cache lists and items locally
 - Queue offline mutations
 - Replay mutations on reconnect
 
 ### UI Requirements
+
 - Offline indicator
 - Syncing indicator
 - Errors surfaced non-destructively
 
 ### Tests
+
 - Offline queue tests
 - Sync resolution tests
 
@@ -239,19 +276,23 @@ App works without internet.
 ## 8. Categories per List
 
 ### Goal
+
 Structured shopping.
 
 ### Tasks
+
 - Add `categories` table
 - Associate items with categories
 - Seed default categories per list
 - Render grouped items
 
 ### UI Requirements
+
 - Loading state while categories load
 - Empty category handling
 
 ### Tests
+
 - Category ordering logic tests
 - Item grouping tests
 
@@ -260,9 +301,11 @@ Structured shopping.
 ## 9. Category Management UI
 
 ### Goal
+
 User controls structure.
 
 ### Tasks
+
 - Add category editor:
   - Add
   - Rename
@@ -270,10 +313,12 @@ User controls structure.
 - Persist category order
 
 ### UI Requirements
+
 - Optimistic updates
 - Error recovery if save fails
 
 ### Tests
+
 - Reordering logic tests
 - Rename validation tests
 
@@ -282,19 +327,23 @@ User controls structure.
 ## 10. Multiple Lists
 
 ### Goal
+
 Support multiple shopping contexts.
 
 ### Tasks
+
 - Create multiple lists
 - List switcher UI
 - Persist last-used list
 - Scope categories and items per list
 
 ### UI Requirements
+
 - Loading state when switching lists
 - Error UI if list fetch fails
 
 ### Tests
+
 - List switching logic tests
 - State isolation tests
 
@@ -303,18 +352,22 @@ Support multiple shopping contexts.
 ## 11. Checked Items & Clearing
 
 ### Goal
+
 Clean shopping flow.
 
 ### Tasks
+
 - Cross out checked items
 - Add "Clear checked items" button
 - Move cleared items to history table
 
 ### UI Requirements
+
 - Undo feedback (optional toast)
 - No accidental destructive actions
 
 ### Tests
+
 - Clear logic tests
 - History persistence tests
 
@@ -323,18 +376,22 @@ Clean shopping flow.
 ## 12. Item History & Suggestions
 
 ### Goal
+
 Reduce typing friction.
 
 ### Tasks
+
 - Store historical items
 - Track frequency + recency
 - Suggest items during input
 
 ### UI Requirements
+
 - Non-blocking suggestions
 - Graceful empty state
 
 ### Tests
+
 - Suggestion ranking tests
 - History read/write tests
 
@@ -343,6 +400,7 @@ Reduce typing friction.
 ## End State 🎯
 
 A production-ready app that:
+
 - Is deployed from day one
 - Is guarded by CI and AI rules
 - Works offline and online

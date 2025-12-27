@@ -1,4 +1,5 @@
 # Product Requirements Document (PRD)
+
 ## Shared Shopping List Web App
 
 ---
@@ -12,6 +13,7 @@ This product is a shared, web-based shopping list application designed for a sma
 ## 2. Goals
 
 ### Primary Goals
+
 - Enable multiple users to share and edit shopping lists via the web
 - Support offline usage with automatic syncing when connectivity returns
 - Organize items using customizable categories
@@ -20,11 +22,13 @@ This product is a shared, web-based shopping list application designed for a sma
 - Be deployed and hosted entirely on free tiers
 
 ### Secondary Goals
+
 - Provide real-time updates when multiple users are active
 - Reduce repetitive input by suggesting previously added items
 - Maintain a low-friction, mobile-first user experience
 
 ### Non-Goals
+
 - Grocery pricing, store integrations, or delivery
 - Complex inventory or quantity management
 - Advanced analytics or recommendation engines
@@ -34,9 +38,11 @@ This product is a shared, web-based shopping list application designed for a sma
 ## 3. Users
 
 ### Primary Users
+
 - Small, trusted group (e.g. two partners in a household)
 
 ### Assumptions
+
 - All users are authenticated
 - All users have access to the same shared lists
 - No public or anonymous access
@@ -46,6 +52,7 @@ This product is a shared, web-based shopping list application designed for a sma
 ## 4. Core Features (MVP)
 
 ### 4.1 Authentication
+
 - Google SSO
 - No app-managed passwords
 - Users automatically re-authenticated on return
@@ -53,12 +60,14 @@ This product is a shared, web-based shopping list application designed for a sma
 ---
 
 ### 4.2 Multiple Lists
+
 - Users can create, rename, and delete lists
 - One list is active at a time
 - Last-used list opens by default on app load
 - Lists are switchable via a lightweight list switcher UI
 
 Examples:
+
 - Groceries
 - Specialised Items
 - Big Purchases
@@ -66,6 +75,7 @@ Examples:
 ---
 
 ### 4.3 Shared List Editing
+
 - Items can be added, checked, and removed
 - Changes persist across sessions
 - All users see the same list state
@@ -73,6 +83,7 @@ Examples:
 ---
 
 ### 4.4 Offline Support
+
 - App functions fully while offline
 - Users can:
   - Add items
@@ -85,6 +96,7 @@ Examples:
 ---
 
 ### 4.5 Categories
+
 - Each list has its own set of categories
 - Each item belongs to exactly one category
 - Users can:
@@ -97,6 +109,7 @@ Examples:
 ---
 
 ### 4.6 Item States
+
 - Items can be checked off
 - Checked items:
   - Remain visible
@@ -107,6 +120,7 @@ Examples:
 ---
 
 ### 4.7 Item History & Suggestions
+
 - The app records previously added items
 - When adding a new item:
   - Previously used items are suggested as the user types
@@ -131,20 +145,24 @@ Examples:
 ## 6. UI Flows (Summary)
 
 ### App Entry
+
 - First-time users sign in and are dropped into a default list
 - Returning users open directly to the last-used list
 
 ### List Switching
+
 - Tapping the list name opens a list switcher
 - Users can select an existing list or create a new one
 
 ### List View
+
 - Items grouped by category
 - Inline add item input
 - Checked items crossed out
 - Button to clear checked items
 
 ### Category Management
+
 - Per-list category editor
 - Drag-and-drop reordering
 - Inline rename and add
@@ -167,16 +185,19 @@ Examples:
 ## 8. Non-Functional Requirements
 
 ### Technology Constraints
+
 - Use widely adopted, well-documented technologies
 - Avoid experimental or niche frameworks
 - Strong community and example coverage
 
 ### Performance
+
 - Initial load under 2 seconds on mobile
 - Local interactions feel instant
 - Sync operations do not block UI
 
 ### Security
+
 - Authenticated access only
 - Data scoped to a shared household context
 - No public write access
@@ -186,11 +207,13 @@ Examples:
 ## 9. Testing & Quality Requirements
 
 ### Automated Testing
+
 - Unit tests for core logic (items, categories, syncing)
 - Integration tests for key user flows
 - Frontend component tests where appropriate
 
 ### Test Coverage Expectations
+
 - Core business logic covered
 - Offline-to-online sync behavior tested
 - List and category operations tested
@@ -200,9 +223,11 @@ Examples:
 ## 10. CI / CD Requirements
 
 ### Source Control
+
 - GitHub repository as the single source of truth
 
 ### Continuous Integration
+
 - GitHub Actions used for CI
 - On every pull request:
   - Run automated tests
@@ -210,6 +235,7 @@ Examples:
   - Fail builds on test or lint errors
 
 ### Deployment
+
 - Automated deployment triggered via GitHub
 - Deploy on merge to main branch
 - Use free-tier hosting (e.g. Vercel, Netlify)
