@@ -14,7 +14,13 @@ function getEnvVar(key: string, defaultValue?: string): string {
   if (defaultValue) {
     return defaultValue;
   }
-  throw new Error(`Missing required environment variable: ${key}`);
+  const isVercel = process.env.VERCEL === "1";
+  const envHint = isVercel
+    ? " Make sure the environment variable is set in Vercel dashboard for the correct environment (Production, Preview, or Development)."
+    : "";
+  throw new Error(
+    `Missing required environment variable: ${key}.${envHint} If you just added this variable, you may need to redeploy.`
+  );
 }
 
 export function getSupabaseUrl(): string {

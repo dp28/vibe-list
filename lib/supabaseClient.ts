@@ -14,4 +14,13 @@ export function createSupabaseClient() {
   });
 }
 
-export const supabase = createSupabaseClient();
+let clientInstance: ReturnType<typeof createSupabaseClient> | null = null;
+
+export function getSupabaseClient() {
+  if (!clientInstance) {
+    clientInstance = createSupabaseClient();
+  }
+  return clientInstance;
+}
+
+export const supabase = getSupabaseClient();
